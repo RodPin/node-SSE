@@ -7,4 +7,9 @@
 `yarn` install dependencies<br />
 `yarn start` run it <br />
 
+### `What really matters`
+
+`backend.js` File that simulates Backend<br />
+`App.js` File that simulates Frontend
+
 
