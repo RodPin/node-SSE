@@ -5,9 +5,10 @@ import "./App.css";
 function App() {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    let eventSource = new EventSource("http://localhost:3002/detailWithSSE");
+    let eventSource = new EventSource("http://localhost:3002/counter");
     eventSource.onmessage = (e) => {
       //Parsing JSON cause it comes it string format
+      console.log(e.data);
       const xCount = JSON.parse(e.data).count;
       setCount(xCount);
     };
