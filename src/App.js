@@ -1,17 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-const eventSource = new EventSource("http://localhost:3002/detailWithSSE");
 function App() {
-  console.log(eventSource);
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    let eventSource = new EventSource("http://localhost:3002/detailWithSSE");
+    eventSource.onmessage = (e) => {
+      //Parsing JSON cause it comes it string format
+      const xCount = JSON.parse(e.data).count;
+      setCount(xCount);
+    };
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <p>Count {count}</p>
         <a
           className="App-link"
           href="https://reactjs.org"
